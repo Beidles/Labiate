@@ -1142,16 +1142,5 @@ struct QuizView: View {
     }
 }
 
-// ============================================================
-// MARK: - APP ENTRY POINT
-// '@main' tells Swift: start the app here.
-// ============================================================
-
-@main
-struct LabiateApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
-}
+// NOTE: Do NOT add @main here.
+// Swift Playgrounds already has @main in MyApp.swift — that file calls ContentView().
