@@ -134,7 +134,7 @@ let allPlants: [Plant] = [
     Plant(id: 16, name: "Ballota",       common: "Black Horehound",       turkish: "Ballota / Andız otu",
           description: "Woolly herbs. Calyx tube widens into a toothed flat star-like limb after flowering.",
           habitat: "Roadsides, rocky slopes, waste ground",
-          funFact: "Its strong unpleasant smell keeps animals from eating it — nature's own pest repellent!"),
+          funFact: "Its strong smell stops animals from eating it - a built-in pest repellent!"),
 
     Plant(id: 17, name: "Marrubium",     common: "Horehound",             turkish: "Topalak / Acı nane",
           description: "White-woolly herbs. Calyx has 5-10 hook-like teeth. Stamens hidden inside tube.",
@@ -169,7 +169,7 @@ let allPlants: [Plant] = [
     Plant(id: 23, name: "Dracocephalum", common: "Dragonhead",            turkish: "Ejderha başı",
           description: "Blue-purple flowers. Bracteoles have pointed (acuminate) tips. Perennial herbs.",
           habitat: "Mountain steppes, rocky slopes",
-          funFact: "The name means dragon head in Greek — the flowers look like a dragon's open mouth!"),
+          funFact: "The name means dragon head in Greek - the flowers look like a dragon mouth!"),
 
     Plant(id: 24, name: "Lallemantia",   common: "Lallemantia",           turkish: "Lallemantia",
           description: "Unique: upper lip of corolla has 2 internal folds. Bracteoles prominently veined.",
@@ -652,10 +652,12 @@ let keySteps: [KeyStep] = [
 
 // Helper functions to look up a step or plant by ID
 func findStep(_ id: String) -> KeyStep? {
-    keySteps.first(where: { step in step.id == id })
+    for step in keySteps { if step.id == id { return step } }
+    return nil
 }
 func findPlant(_ id: Int) -> Plant? {
-    allPlants.first(where: { plant in plant.id == id })
+    for plant in allPlants { if plant.id == id { return plant } }
+    return nil
 }
 
 // ============================================================
