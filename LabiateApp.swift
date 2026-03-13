@@ -652,10 +652,10 @@ let keySteps: [KeyStep] = [
 
 // Helper functions to look up a step or plant by ID
 func findStep(_ id: String) -> KeyStep? {
-    keySteps.first { $0.id == id }
+    keySteps.first(where: { step in step.id == id })
 }
 func findPlant(_ id: Int) -> Plant? {
-    allPlants.first { $0.id == id }
+    allPlants.first(where: { plant in plant.id == id })
 }
 
 // ============================================================
@@ -696,7 +696,7 @@ struct BrowseView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         HStack {
                             // Genus number
-                            Text("\(plant.id).")
+                            Text(String(plant.id) + ".")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                             // Latin name in italics
@@ -736,7 +736,7 @@ struct PlantDetailView: View {
 
                 // Header
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Genus \(plant.id)")
+                    Text("Genus " + String(plant.id))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                     Text(plant.name)
@@ -956,11 +956,11 @@ struct SearchView: View {
     // 'var' with a computed value — filters automatically as query changes
     var results: [Plant] {
         guard !query.isEmpty else { return allPlants }
-        return allPlants.filter {
-            $0.name.localizedCaseInsensitiveContains(query)    ||
-            $0.common.localizedCaseInsensitiveContains(query)  ||
-            $0.turkish.localizedCaseInsensitiveContains(query) ||
-            $0.description.localizedCaseInsensitiveContains(query)
+        return allPlants.filter { plant in
+            plant.name.localizedCaseInsensitiveContains(query)
+            || plant.common.localizedCaseInsensitiveContains(query)
+            || plant.turkish.localizedCaseInsensitiveContains(query)
+            || plant.description.localizedCaseInsensitiveContains(query)
         }
     }
 
