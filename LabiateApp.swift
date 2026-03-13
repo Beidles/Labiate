@@ -807,7 +807,7 @@ struct IdentifyView: View {
                     // Navigation buttons
                     HStack(spacing: 12) {
                         if !history.isEmpty {
-                            Button("← Back") { goBack() }
+                            Button("Back") { goBack() }
                                 .buttonStyle(.bordered)
                         }
                         Button("Reset") { reset() }
@@ -824,7 +824,7 @@ struct IdentifyView: View {
     // The card showing a question with A and B buttons
     func questionCard(step: KeyStep) -> some View {
         VStack(spacing: 16) {
-            Text("Question \(questionCount + 1)")
+            Text("Question " + String(questionCount + 1))
                 .font(.caption).foregroundStyle(.secondary)
 
             Text(step.question)
@@ -916,7 +916,7 @@ struct ResultView: View {
                 .font(.system(size: 64))
                 .foregroundStyle(.green)
 
-            Text("Identified in \(questionCount) questions!")
+            Text("Identified in " + String(questionCount) + " questions!")
                 .font(.subheadline).foregroundStyle(.secondary)
 
             Text(plant.name)
@@ -972,7 +972,7 @@ struct SearchView: View {
                 NavigationLink(destination: PlantDetailView(plant: plant)) {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(plant.name).font(.headline).italic()
-                        Text("\(plant.common) • \(plant.turkish)")
+                        Text(plant.common + " - " + plant.turkish)
                             .font(.caption).foregroundStyle(.secondary)
                     }
                 }
@@ -1034,9 +1034,9 @@ struct QuizView: View {
             ProgressView(value: Double(index), total: 5)
                 .tint(.green)
             HStack {
-                Text("Question \(index + 1) of 5").font(.caption).foregroundStyle(.secondary)
+                Text("Question " + String(index + 1) + " of 5").font(.caption).foregroundStyle(.secondary)
                 Spacer()
-                Text("Score: \(score)").font(.caption.bold()).foregroundStyle(.green)
+                Text("Score: " + String(score)).font(.caption.bold()).foregroundStyle(.green)
             }
 
             // Clues card
@@ -1070,7 +1070,7 @@ struct QuizView: View {
                     } else {
                         Label("Not quite!", systemImage: "xmark.circle.fill")
                             .foregroundStyle(.red).font(.headline)
-                        Text("Answer: \(plant.name) (\(plant.common))")
+                        Text("Answer: " + plant.name + " (" + plant.common + ")")
                             .foregroundStyle(.secondary)
                     }
                 }
@@ -1079,7 +1079,7 @@ struct QuizView: View {
                 .background(isCorrect ? Color.green.opacity(0.1) : Color.red.opacity(0.1))
                 .clipShape(RoundedRectangle(cornerRadius: 12))
 
-                Button("Next →") { nextQuestion() }
+                Button("Next") { nextQuestion() }
                     .buttonStyle(.borderedProminent).tint(.green)
             }
         }
@@ -1091,7 +1091,7 @@ struct QuizView: View {
             Image(systemName: score >= 4 ? "star.circle.fill" : "hand.thumbsup.fill")
                 .font(.system(size: 80)).foregroundStyle(.green)
             Text("Quiz Complete!").font(.title).bold()
-            Text("You scored \(score) out of 5").font(.title2)
+            Text("You scored " + String(score) + " out of 5").font(.title2)
             Text(message).multilineTextAlignment(.center).foregroundStyle(.secondary)
             Button("Play Again") { startQuiz() }
                 .buttonStyle(.borderedProminent).tint(.green).controlSize(.large)
