@@ -718,7 +718,6 @@ struct BrowseView: View {
                 }
             }
             .navigationTitle("45 Genera of Labiatae")
-            .navigationSubtitle("Flora of Turkey • P.H. Davis")
         }
     }
 }
@@ -817,7 +816,6 @@ struct IdentifyView: View {
                 .padding()
             }
             .navigationTitle("Identify Your Plant")
-            .navigationSubtitle("Davis Key — Flora of Turkey")
         }
     }
 
