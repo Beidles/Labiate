@@ -690,7 +690,7 @@ struct ContentView: View {
 
 struct BrowseView: View {
     var body: some View {
-        NavigationStack {
+        NavigationView {
             List(allPlants) { plant in
                 NavigationLink(destination: PlantDetailView(plant: plant)) {
                     VStack(alignment: .leading, spacing: 4) {
@@ -792,7 +792,7 @@ struct IdentifyView: View {
     @State private var history: [KeyStep]    = []  // For the Back button
 
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ScrollView {
                 VStack(spacing: 20) {
 
@@ -965,7 +965,7 @@ struct SearchView: View {
     }
 
     var body: some View {
-        NavigationStack {
+        NavigationView {
             List(results) { plant in
                 NavigationLink(destination: PlantDetailView(plant: plant)) {
                     VStack(alignment: .leading, spacing: 4) {
@@ -998,7 +998,7 @@ struct QuizView: View {
     var current: Plant? { index < quizPlants.count ? quizPlants[index] : nil }
 
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ScrollView {
                 VStack(spacing: 20) {
                     if quizPlants.isEmpty      { startScreen }
