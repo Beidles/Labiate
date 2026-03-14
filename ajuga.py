@@ -2,11 +2,21 @@
 # AJUGA (Bugle) - Identification App for Turkey
 # Source: Flora of Turkey, Vol. 7 — P.H. Davis (1982)
 #
-# HOW TO RUN:
+# ── HOW TO RUN ON REPLIT ────────────────────────────────────
+#  1. Go to replit.com and create a new Python repl
+#  2. Paste this whole file into main.py  (or ajuga.py)
+#  3. In the Shell tab type:
+#       pip install streamlit Pillow
+#  4. Then run:
+#       streamlit run main.py --server.port=8080 --server.headless=true
+#  5. Click the "Open in new tab" button Replit shows — done!
+#     (If you added a .replit file, just press the Run button)
+#
+# ── HOW TO RUN LOCALLY ──────────────────────────────────────
 #   pip install streamlit Pillow
 #   streamlit run ajuga.py
 #
-# PHOTOS:
+# ── PHOTOS ──────────────────────────────────────────────────
 #   Use the Upload button on any species — photos save
 #   automatically in a folder called ajuga_photos/
 # ============================================================
