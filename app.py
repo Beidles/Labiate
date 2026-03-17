@@ -834,8 +834,8 @@ st.caption("45 genera of the Mint Family · Based on Flora of Turkey, Vol. 7 · 
 # TABS — the four sections of the app
 # ============================================================
 
-tab_browse, tab_identify, tab_search, tab_quiz = st.tabs(
-    ["📋 Browse", "🔍 Identify", "🔎 Search", "❓ Quiz"]
+tab_browse, tab_identify, tab_search, tab_quiz, tab_swift = st.tabs(
+    ["📋 Browse", "🔍 Identify", "🔎 Search", "❓ Quiz", "📱 Swift Code"]
 )
 
 # ============================================================
@@ -1091,3 +1091,31 @@ with tab_quiz:
                     st.session_state.quiz_submitted = False
                     st.session_state.quiz_guess = ""
                 st.rerun()
+
+# ============================================================
+# TAB 5: SWIFT CODE
+# Shows the full LabiateApp.swift with a one-click copy button
+# ============================================================
+
+with tab_swift:
+    st.subheader("Swift Playgrounds Code (iPad)")
+    st.write("Click the **copy icon** in the top-right corner of the code box to copy everything.")
+    st.info(
+        "**How to use:**\n"
+        "1. Copy the code below\n"
+        "2. Open Swift Playgrounds on iPad → tap **+** → App Playground → Create\n"
+        "3. Tap the file in the sidebar (e.g. `MyApp.swift`)\n"
+        "4. Select all existing code and delete it\n"
+        "5. Paste this code in\n"
+        "6. Delete any other `.swift` files in the project\n"
+        "7. Tap the Run ▶ button"
+    )
+
+    import os
+    swift_path = os.path.join(os.path.dirname(__file__), "LabiateApp.swift")
+    try:
+        with open(swift_path, "r", encoding="utf-8") as f:
+            swift_code = f.read()
+        st.code(swift_code, language="swift")
+    except FileNotFoundError:
+        st.error("LabiateApp.swift not found next to app.py")
