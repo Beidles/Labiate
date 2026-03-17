@@ -16,6 +16,7 @@
 
 import streamlit as st   # The library that makes the web app
 import random            # Used to shuffle quiz questions
+import streamlit.components.v1 as components  # For clipboard JS
 
 # ============================================================
 # PAGE SETUP
@@ -713,6 +714,25 @@ KEY = {
 # HELPER — look up a plant by its ID number
 # ============================================================
 
+def copy_to_clipboard_button(text, key="copy"):
+    """Render an HTML button that copies `text` to the clipboard."""
+    # Escape for safe JS string embedding
+    safe = text.replace("\\", "\\\\").replace("'", "\\'").replace("\n", "\\n")
+    components.html(
+        f"""
+        <button
+            onclick="navigator.clipboard.writeText('{safe}')
+                     .then(()=>{{this.textContent='✅ Copied!';
+                                setTimeout(()=>this.textContent='📋 Copy plant info',2000);}});"
+            style="background:#4CAF50;color:white;border:none;padding:8px 18px;
+                   border-radius:6px;cursor:pointer;font-size:14px;margin-top:6px;">
+            📋 Copy plant info
+        </button>
+        """,
+        height=50,
+    )
+
+
 def get_plant(plant_id):
     # Go through the list and return the one with the matching id
     for p in PLANTS:
@@ -761,6 +781,16 @@ def show_plant_card(plant):
         st.write(plant["fun_fact"])
 
     st.caption("Source: Flora of Turkey, Vol. 7 — P.H. Davis")
+
+    # --- Copy to clipboard ---
+    plant_text = (
+        f"{plant['name']} ({plant['common']}) — {plant['turkish']}\n"
+        f"Key Features: {plant['description']}\n"
+        f"Habitat: {plant['habitat']}\n"
+        f"Fun Fact: {plant['fun_fact']}\n"
+        f"Source: Flora of Turkey, Vol. 7 — P.H. Davis"
+    )
+    copy_to_clipboard_button(plant_text, key=f"copy_{plant['id']}")
 
 # ============================================================
 # SESSION STATE SETUP
