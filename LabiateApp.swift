@@ -6,9 +6,10 @@
 //   1. Open Swift Playgrounds app
 //   2. Tap "+" → "App Playground" → Create
 //   3. Tap the file in the sidebar (usually "MyApp.swift")
-//   4. Select ALL the code and DELETE it
-//   5. Paste THIS code in
-//   6. Tap the Run button (▶)
+//   4. Select ALL the existing code and DELETE it
+//   5. Paste THIS entire file in (it includes the @main entry point)
+//   6. If there are other .swift files in the project, delete them
+//   7. Tap the Run button (▶)
 // ============================================================
 
 import SwiftUI
@@ -1144,5 +1145,16 @@ struct QuizView: View {
     }
 }
 
-// NOTE: Do NOT add @main here.
-// Swift Playgrounds already has @main in MyApp.swift — that file calls ContentView().
+// ============================================================
+// MARK: - APP ENTRY POINT
+// This tells Swift Playgrounds: "start the app here"
+// ============================================================
+
+@main
+struct LabiateApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
