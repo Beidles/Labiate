@@ -342,8 +342,8 @@ st.divider()
 # TABS
 # ============================================================
 
-tab_key, tab_browse, tab_search = st.tabs(
-    ["🔑 Identify My Plant", "📋 Browse All Species", "🔎 Search"]
+tab_key, tab_browse, tab_search, tab_swift = st.tabs(
+    ["🔑 Identify My Plant", "📋 Browse All Species", "🔎 Search", "📱 Swift Code"]
 )
 
 # ============================================================
@@ -597,3 +597,49 @@ with tab_search:
                 f"{badge} {flower} **{sp['id']}. {sp['name']}** "
                 f"({sp['nickname']}) — {sp['how_to_spot_it']}"
             )
+
+# ============================================================
+# TAB 4: SWIFT CODE — split into 5 files for Swift Playgrounds
+# ============================================================
+
+import os as _os
+
+_SWIFT_DIR = _os.path.join(_os.path.dirname(__file__), "swift_split")
+
+_SWIFT_FILES = [
+    ("1_Models.swift",    "File 1 — Models & Helpers",       "Data structures and helper functions"),
+    ("2_PlantData.swift", "File 2 — Plant Database",         "All 45 genera of Labiatae in Turkey"),
+    ("3_KeyData.swift",   "File 3 — Identification Key",     "Dichotomous key steps (s1–s60)"),
+    ("4_Views.swift",     "File 4 — SwiftUI Views",          "Browse, Identify, Search, and Quiz views"),
+    ("5_LabiateApp.swift","File 5 — App Entry Point",        "ContentView + @main (paste into main file)"),
+]
+
+with tab_swift:
+    st.subheader("📱 LabiateApp — Swift Playgrounds (iPad)")
+    st.info(
+        "The full app is split into **5 smaller files** so Swift Playgrounds on iPad "
+        "doesn't freeze. Copy each file one at a time."
+    )
+
+    st.markdown("""
+**How to set up in Swift Playgrounds:**
+1. Open Swift Playgrounds → tap **+** → **App Playground** → Create
+2. In the sidebar, tap **+** to add **4 new Swift files** (you'll have 5 total)
+3. Rename them: `1_Models`, `2_PlantData`, `3_KeyData`, `4_Views`, `5_LabiateApp`
+4. Paste each file's code into the matching file (use the Copy button below)
+5. The **main app file** (house icon) = paste **File 5** there
+6. Tap **Run ▶**
+""")
+
+    st.divider()
+
+    for filename, title, description in _SWIFT_FILES:
+        filepath = _os.path.join(_SWIFT_DIR, filename)
+        if _os.path.exists(filepath):
+            with open(filepath, "r") as f:
+                code = f.read()
+            line_count = len(code.splitlines())
+            with st.expander(f"**{title}** — {description} ({line_count} lines)"):
+                st.code(code, language="swift")
+        else:
+            st.warning(f"File not found: {filename}")
