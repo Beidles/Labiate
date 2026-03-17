@@ -3,12 +3,13 @@
 //
 // HOW TO USE:
 //   1. Create a NEW App Playground ("My App")
-//   2. Tap the house-icon file (ContentView)
-//   3. SELECT ALL and DELETE everything
+//   2. You will see 1 default file in the sidebar — tap it
+//   3. SELECT ALL (tap screen → Select All) and DELETE
 //   4. Paste THIS entire file
 //   5. Tap Run ▶
 //
-// That's it — no extra files needed!
+// That's it — ONE file, no others needed!
+// IMPORTANT: Delete ALL the default content before pasting.
 // ============================================================
 
 import SwiftUI
@@ -890,6 +891,17 @@ struct QuizView: View {
     func nextQuestion() {
         index += 1; guess = ""; showAnswer = false; isCorrect = false
         if index >= quizPlants.count { finished = true }
+    }
+}
+
+// MARK: - App Entry Point
+
+@main
+struct LabiateApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
     }
 }
 
